@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="de.bayreuth.android.text2scan.MainActivity"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linearlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/choose_from_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="@string/choose_from_gallery"
+                tools:context=".MainActivity" />
+
+            <Button
+                android:id="@+id/take_a_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="@string/take_a_photo"
+                tools:context=".MainActivity"
+                tools:layout_editor_absoluteX="130dp"
+                tools:layout_editor_absoluteY="82dp" />
+
+            <!--<Button
+                android:id="@+id/summarize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.5"
+                android:text="@string/summarize"
+                tools:context=".MainActivity"
+                android:visibility="gone"/>-->
+
+            <Button
+                android:id="@+id/readout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="5"
+                android:text="@string/read_out_loud"
+                tools:context=".MainActivity" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/detected_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEEEEE"
+            android:scrollbars="vertical"
+            android:text=""
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="155dp"
+            android:layout_weight="10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_weight="0.3"
+                android:textAllCaps="true"
+                android:text="Summary"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_gravity="center"
+                android:checked="false"
+                android:theme="@style/SCBSwitch"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:text="Original"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
