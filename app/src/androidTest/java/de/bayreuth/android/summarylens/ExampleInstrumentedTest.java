@@ -1,4 +1,4 @@
-package de.bayreuth.android.text2scan;
+package de.bayreuth.android.summarylens;
 
 import android.content.Context;
 

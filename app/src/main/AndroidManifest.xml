@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.bayreuth.android.text2scan">
+    package="de.bayreuth.android.summarylens">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true">
         <activity
-            android:name=".MainActivity"
+            android:name="de.bayreuth.android.summarylens.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
