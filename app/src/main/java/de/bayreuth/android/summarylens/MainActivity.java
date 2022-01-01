@@ -27,9 +27,19 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
@@ -39,8 +49,10 @@ import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -230,12 +242,13 @@ public class MainActivity extends AppCompatActivity {
         for(String i : finalText)
             System.out.println(i);
 
-        summarizedText = "A few people were uncertain; for example, they thought the size of apartments might reduce as the population of the city grew, but they also thought that public transport would become better. In general, they believed that the cities of the future would offer a much more convenient way of living. A smaller number thought cities might become a lot cleaner, and might be built from more interesting materials. In many countries around the world, people are choosing to have smaller families or to wait longer before they start a family. In the past, the architects who were responsible for planning our cities often designed buildings that they were interested in; but now it is time for them to listen carefully to what people living in cities are asking for.";
-        detectedTextView.setText(Html.fromHtml("<font color='#009f7a'>" + summarizedText + "</font>"));
+        // Simulate
+        //summarizedText = "A few people were uncertain; for example, they thought the size of apartments might reduce as the population of the city grew, but they also thought that public transport would become better. In general, they believed that the cities of the future would offer a much more convenient way of living. A smaller number thought cities might become a lot cleaner, and might be built from more interesting materials. In many countries around the world, people are choosing to have smaller families or to wait longer before they start a family. In the past, the architects who were responsible for planning our cities often designed buildings that they were interested in; but now it is time for them to listen carefully to what people living in cities are asking for.";
+        //detectedTextView.setText(Html.fromHtml("<font color='#009f7a'>" + summarizedText + "</font>"));
 
 
 
-        /*RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         String url = "https://btn6xd.inf.uni-bayreuth.de/summarization_api/summarize-text2scan";
 
 
@@ -253,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     System.out.println(s.getString("result"));
                     summarizedText = s.getString("result");
-                    detectedTextView.setText(summarizedText);
+                    detectedTextView.setText(Html.fromHtml("<font color='#009f7a'>" + summarizedText + "</font>"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -262,25 +275,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 System.out.println("Response Failed: " + volleyError.getMessage());
-                detectedTextView.setText("Service offline!");
+                summarizedText = "Service offline!";
+                detectedTextView.setText(Html.fromHtml("<font color='#009f7a'>" + summarizedText + "</font>"));
             }
         }){
-                    *//*@Override
+                    /*@Override
                     protected Map<String, String> getParams(){
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("eingabe", "finalPar");
                         return params;
-                    }*//*
+                    }*/
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError{
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 return params;
             }
         };
 
-        queue.add(jsonArrayRequest);*/
+        queue.add(jsonArrayRequest);
     }
 
     public static String removeDoubleQuotes(String input){
@@ -362,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(i);
 
             //Simulate
-            par = "Researchers recently gave 1,000 people a questionnaire about 'Cities of The Future'. To answer the questions, the people had to imagine and describe what they thought our cities might look like in the year 2050. Interestingly, a large number of people were anxious that they would become 'dark, dangerous places', which had endless traffic jams and very few green spaces. This group also predicted an increase in the level of pollution and thought people would always need to wear facemasks in order to breathe. They also believed that it would be less safe to walk on the street as there would be 'more stealing' and other criminal behaviour. A smaller number thought cities might become a lot cleaner, and might be built from more interesting materials. They were also looking forward to new technology such as fiying cars and moving pavements. In general, they believed that the cities of the future would offer a much more convenient way of living. A few people were uncertain; for example, they thought the size of apartments might reduce as the population of the city grew, but they also thought that public transport would become better What do the results from this questionnaire tell us? In a way, we shouldn't be amazed by the descriptions of the largest group. So many Hllywood films show cities of the future as frightening places. Online newspapers are also responsible for spreading this same belief. Headlines such as 'Global population rises - cities become crowded' are becoming more frequent. Journalists rarely discuss how future cities might be a good place to live. The facts are these: 50% of people now live in cities, even though cities only occupy 2% of the world's land. By 2050, it is predicted that the number of people living there will rise to 70%. Some people are worried that villages in the countryside will become empty as everyone leaves for the city, and so traditional ways of life will be lost. This may be true, but we have to accept changes like this as part of human development. Rather than being negative, we should be hopeful that we can improve people's lives as they move to cities. The way to do this is through intelligent planning. Architects have a big role to play in our future cities. In the past, the architects who were responsible for planning our cities often designed buildings that they were interested in; but now it is time for them to listen carefully to what people living in cities are asking for. In many countries around the world, people are choosing to have smaller families or to wait longer before they start a family. For this reason, not everyone needs a large house. Smaller and cheaper houses are what they need. But 'small' doesn't have to be the same as 'ugly' or 'boring'. Western architects could perhaps look at some of the architecture in Japanese cities, where very stylish houses are built on small pieces of unused land. And what might cities of the future be made from? Engineering companies have produced some interesting new products, for example, wood-like material made from recycled newspapers or old drink cartons. One engineering team are even working on a project that uses mushrooms to create a hard building material. These new materials may seem strange, but we should remember that plastic was only invented in 1907-at the time people thought that this was an unusual product, but now it is something we cannot manage without. Building a city of the future requires imagination and an open mind. </font>";
+            // par = "Researchers recently gave 1,000 people a questionnaire about 'Cities of The Future'. To answer the questions, the people had to imagine and describe what they thought our cities might look like in the year 2050. Interestingly, a large number of people were anxious that they would become 'dark, dangerous places', which had endless traffic jams and very few green spaces. This group also predicted an increase in the level of pollution and thought people would always need to wear facemasks in order to breathe. They also believed that it would be less safe to walk on the street as there would be 'more stealing' and other criminal behaviour. A smaller number thought cities might become a lot cleaner, and might be built from more interesting materials. They were also looking forward to new technology such as fiying cars and moving pavements. In general, they believed that the cities of the future would offer a much more convenient way of living. A few people were uncertain; for example, they thought the size of apartments might reduce as the population of the city grew, but they also thought that public transport would become better What do the results from this questionnaire tell us? In a way, we shouldn't be amazed by the descriptions of the largest group. So many Hllywood films show cities of the future as frightening places. Online newspapers are also responsible for spreading this same belief. Headlines such as 'Global population rises - cities become crowded' are becoming more frequent. Journalists rarely discuss how future cities might be a good place to live. The facts are these: 50% of people now live in cities, even though cities only occupy 2% of the world's land. By 2050, it is predicted that the number of people living there will rise to 70%. Some people are worried that villages in the countryside will become empty as everyone leaves for the city, and so traditional ways of life will be lost. This may be true, but we have to accept changes like this as part of human development. Rather than being negative, we should be hopeful that we can improve people's lives as they move to cities. The way to do this is through intelligent planning. Architects have a big role to play in our future cities. In the past, the architects who were responsible for planning our cities often designed buildings that they were interested in; but now it is time for them to listen carefully to what people living in cities are asking for. In many countries around the world, people are choosing to have smaller families or to wait longer before they start a family. For this reason, not everyone needs a large house. Smaller and cheaper houses are what they need. But 'small' doesn't have to be the same as 'ugly' or 'boring'. Western architects could perhaps look at some of the architecture in Japanese cities, where very stylish houses are built on small pieces of unused land. And what might cities of the future be made from? Engineering companies have produced some interesting new products, for example, wood-like material made from recycled newspapers or old drink cartons. One engineering team are even working on a project that uses mushrooms to create a hard building material. These new materials may seem strange, but we should remember that plastic was only invented in 1907-at the time people thought that this was an unusual product, but now it is something we cannot manage without. Building a city of the future requires imagination and an open mind. </font>";
 
             this.detectedText = par;
             summarize(par);
